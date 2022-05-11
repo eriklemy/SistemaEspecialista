@@ -1,0 +1,67 @@
+Nome: Erick Lemmy dos Santos Oliveira
+Nome: Guilherme Janke
+
+Regras:
+
+- dias do mes <= 31, se mes > 30 -> usar 30
+- horario não superior a 24hrs
+- feriado local não conta 
+- grupo a ser distribuido (max = 5 prototipo)
+- distancia da distribuidora até o comercio (max = 5)
+- regiões permitidas [NORTE, NORDESTE, SUL, SUDESTE, CENTRO-OESTE) da distribuidora
+- climas permitidos [CHUVA LEVE, CHUVA MODERADA, ENSOLARADO, NUBLADO, TEMPESTADE, NEBLINA]  
+- epoca do ano dentro das 4 estações [OUTONO, INVERNO, PRIMAVERA, VERÃO] 
+
+- Regras de multiplicador
+    - para horario madrugueiro o multiplicador é 0,8
+    - para transito fora de pico o multiplicador é de 1 
+    - pra transito moderado próximo a horário de pico (tanto para mais ou para menos do horário) o multiplicador é 1,5
+    - para horário de pico o multiplicador é 2
+    - para horario madrugueiro com chuva o multiplicador é 1
+    - para horario fora de pico em dia de chuva multiplicador 1,2
+    - para horario próximo de pico com chuva o multiplicador é 2
+    - para horario de pico com chuva o multiplicador é 3
+- Para distancia de até 10 Km os multiplicadores se mantem os mesmos, para distancias maiores os multiplicadores sofrem um acréscimo de 2%(dois porcento) acada 3 Km a mais na distancia percorrida.
+
+<pre>
+
+TODO: ATRIBUIR OS MULTIPLICADORES PARA DETERMINAR SE CHEGARA EM TEMPO OU NÃO
+TODO: CONSIDERAR REALIZAR A MEDIANA COM TODOS OS RESULTADOS PARA UM PARAMETRO MAIS PROXIMO AO IDEAL (SERA VERIFICADO NA IMPLEMENTAÇÃO)
+
+SE ((horario E dia) => "Comercial") ENTÃO {
+    SE grupos > 5 ENTAO { 
+        show MUITOS GRUPOS
+        exit() 
+    SENAO SE
+        TUDOABAIXO 
+    SENAO 
+	  Return 
+}
+
+@TUDOABAIXO	
+SE ((transito == "baixo") OU (transito == "medio")) E ((tempo <=> 2*distancia) PARA distruidoraX) ENTÃO {
+    SE (tempo == "chuva-moderada") OU (tempo == "tempestade"))  
+        Resultado => "Entrega em tempo"
+    SENAO 
+        Resultado => "A entrega ira potencialmente atrasar"
+}
+
+SE (((dia <= 31) E (diasMes < 31)) E (feriado == V)) E ((clima == "chuva-moderada") OU (clima == "tempestade")) ENTÃO {
+    SE "chovendo" EM ("Sul", "Norte, "Sudeste, "Nordeste, "Centro-Oeste")
+        Resultado => "A entrega ira potencialmente atrasar na(s) região(ões) X
+    SENAO 
+        Resultado => "A entrega ira chegar dentro do tempo esperado"
+}
+
+SE (((dia <= 31) E (diasMes < 31)) E (feriado == F)) E (((clima == "ensolarado") E (tempo <=> 2*distancia)) ENTÃO {
+    SE "chovendo" EM ("Sul", "Norte, "Sudeste, "Nordeste, "Centro-Oeste")
+        Resultado => "A entrega ira potencialmente atrasar na(s) região(ões) X
+    SENAO 
+        Resultado => "A entrega ira chegar dentro do tempo esperado"
+}
+
+FINAL -> SE distruidoras > 1 ENTÃO 
+    resultado => deve ser entregue para [menorDistancia(distribuidoras)]
+
+</pre>
+
