@@ -1,11 +1,13 @@
 from dis import dis
 from constants import *
 
-def comercialDay(distribuidora: list, horario: int, dia: int) -> bool:
-    return ((0 < horario < 24) and (1 <= dia <= 31)) and len(distribuidora) < 5
+def comercialDay(horario: int, dia: int, feriado: bool) -> bool:
+    return ((0 < horario < 24) and (1 <= dia <= 31) and not feriado)
 
+# TODO - adicionar os multiplicadores 
 def SistemaEspecialista(transito: str, horario: int, dia: int, mes: int, tempo: str, feriado: bool, clima: Clima, distribuidora: list, distKey: str) -> None:	
-    if not comercialDay(distribuidora, horario, dia):
+    
+    if not comercialDay(horario, dia, feriado):
         print("DIA NÃO COMERCIAL - A ENTREGA NÃO SERA REALIZADA")
     else:
         if ((transito == "baixo") or (transito == "medio")) and (tempo < 2*distribuidora[distKey]):
