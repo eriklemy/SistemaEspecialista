@@ -44,7 +44,6 @@ Com estas informações há como objetivo identificar o grau de probabilidade de
 - regiões permitidas [NORTE, NORDESTE, SUL, SUDESTE, CENTRO-OESTE) da distribuidora
 - climas permitidos [CHUVA LEVE, CHUVA MODERADA, ENSOLARADO, NUBLADO, TEMPESTADE, NEBLINA]  
 - epoca do ano dentro das 4 estações [OUTONO, INVERNO, PRIMAVERA, VERÃO] 
-
 - Regras de multiplicador
     - para horario madrugueiro o multiplicador é 0,8
     - para transito fora de pico o multiplicador é de 1 
@@ -54,4 +53,25 @@ Com estas informações há como objetivo identificar o grau de probabilidade de
     - para horario fora de pico em dia de chuva multiplicador 1,2
     - para horario próximo de pico com chuva o multiplicador é 2
     - para horario de pico com chuva o multiplicador é 3
-    - Para distancia de até 10 Km os multiplicadores se mantem os mesmos, para distancias maiores os multiplicadores sofrem um acréscimo de 2%(dois porcento) acada 3 Km a mais na distancia percorrida.
+    - Para distancia de até 15 Km(quinze quilometros) o tempo de deslocamento se mantem em 2min(dois minutos) para distancias maiores de 15Km(quinze quilometros) o sofrem um acréscimo de 1 min(um minuto) por quilometro de distancia percorrida.
+
+--- 
+
+VERIFICAR AQUI SE TÁ CERTO
+
+
+#### Regras de inferência 
+
+- SE distancia <= 15 tempo deslocamento 2 mim por Km
+- SE distancia > 15 = tempo deslocamto 3 mim por Km
+- SE horario madrugueiro E tempo bom = tempo deslocamento * 0,8
+- SE horario fora de pico E tempo bom = tempo deslocamento * 1,0
+- SE horario de proximo de pico E tempo bom = tempo deslocamento * 1,5
+- SE horario de pico E tempo bom = tempo deslocamento * 2,0
+- SE horario madrugueiro E tempo ruim = tempo deslocamento * 1,0
+- SE horario fora de pico E tempo ruim = tempo deslocamento * 1,2
+- SE horario de proximo de pico E tempo ruim = tempo deslocamento * 2
+- SE horario de pico e tempo ruim = tempo deslocamento * 3
+- SE tempo pessimo = não entrega
+- SE evento E não bloqueado = tempo deslocamnto * 5,0
+- SE evento e bloqueado = não entregua
