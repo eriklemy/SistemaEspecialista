@@ -8,13 +8,8 @@ class Regioes(Enum):
     CENTRO_OESTE = auto()
 
 class Clima(Enum): 
-    CHUVA_LEVE = auto()
-    CHUVA_MODERADA = auto()
-    ENSOLARADO = auto()
-    NUBLADO = auto()
-    TEMPESTADE = auto()
-    NEBLINA = auto()
-  
+    CHUVA_LEVE, CHUVA_MODERADA, ENSOLARADO, NUBLADO, TEMPESTADE, NEBLINA = range(6)
+
 class Estacoes(Enum):
     OUTONO = auto()
     INVERNO = auto()

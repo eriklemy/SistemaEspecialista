@@ -1,32 +1,68 @@
 from dis import dis
+from webbrowser import get
 from constants import *
 
-def comercialDay(horario: int, dia: int, feriado: bool) -> bool:
-    return ((0 < horario < 24) and (1 <= dia <= 31) and not feriado)
+def tempo_deslocamento(distancia: int) -> int:
+    if distancia <= 15:
+        return 2 * distancia
+    else: return 3 * distancia 
 
-# TODO - adicionar os multiplicadores 
-def SistemaEspecialista(transito: str, horario: int, dia: int, mes: int, tempo: str, feriado: bool, clima: Clima, distribuidora: list, distKey: str) -> None:	
-    
-    if not comercialDay(horario, dia, feriado):
-        print("DIA NÃO COMERCIAL - A ENTREGA NÃO SERA REALIZADA")
+def fluxo_horario(hora: int, min: int) -> str:
+    if (0 <= hora < 24) and (0 <= min <= 59):
+        if hora in [6, 7, 8, 17, 18, 19]:
+            return "pico"
+        elif hora in [23, 0, 1, 2, 3, 4]:
+            return "madrugueiro"
+        elif hora in [5, 16, 20]:
+            return "proximo pico"
+        else:
+            return "fora de pico"
+    else: return "invalido"
+
+def get_clima(clima: int):
+    return Clima(clima - 1)
+
+def SistemaEspecialista(distancia: int, hora: int , min: int, clima: int, regiao_transito_bloqueada: bool, evento: bool) -> None:	
+    t_deslocamento = tempo_deslocamento(distancia)
+
+    if fluxo_horario(hora, min) != "invalido":
+
+        if (fluxo_horario(hora, min) == "madrugueiro" and get_clima(clima) == Clima.ENSOLARADO):        
+            print("INPUT DE CLIMA INVALIDA PARA O HORARIO")
+
+        if (fluxo_horario(hora, min) == "madrugueiro") and get_clima(clima) == (Clima.CHUVA_LEVE or Clima.NEBLINA):
+            t_deslocamento *= 0.8
+
+        if (fluxo_horario(hora, min) == "fora de pico") and get_clima(clima) == (Clima.ENSOLARADO or Clima.CHUVA_LEVE):
+            t_deslocamento *= 1.0
+
+        if (fluxo_horario(hora, min) == "proximo pico") and get_clima(clima) == (Clima.ENSOLARADO or Clima.CHUVA_LEVE):
+            t_deslocamento *= 1.5
+
+        if (fluxo_horario(hora, min) == "pico") and get_clima(clima) == (Clima.ENSOLARADO or Clima.CHUVA_LEVE or Clima.NEBLINA):
+            t_deslocamento *= 2.0
+
+        if (fluxo_horario(hora, min) == "madrugueiro") and get_clima(clima) == (Clima.CHUVA_MODERADA or Clima.NUBLADO or Clima.NEBLINA):
+            t_deslocamento *= 1
+
+        if (fluxo_horario(hora, min) == "fora de pico") and get_clima(clima) == (Clima.CHUVA_MODERADA or Clima.NUBLADO):
+            t_deslocamento *= 1.2
+
+        if (fluxo_horario(hora, min) == "proximo pico") and get_clima(clima) == (Clima.CHUVA_MODERADA or Clima.NUBLADO):
+            t_deslocamento *= 2.0
+
+        if (fluxo_horario(hora, min) == "pico") and get_clima(clima) == (Clima.CHUVA_MODERADA or Clima.NUBLADO or Clima.NEBLINA):
+            t_deslocamento *= 3
+        
+        if (fluxo_horario(hora, min) == "fora de pico") and get_clima(clima) == (Clima.TEMPESTADE):
+            t_deslocamento *= 2.5
+
+        if evento and not regiao_transito_bloqueada:
+            t_deslocamento *= 5.0
+
+        if (get_clima(clima) == Clima.TEMPESTADE) and (evento and regiao_transito_bloqueada):
+            print("A entrega não sera realizada")
+        else:
+            print(f"O tempo medio de entrega é de {t_deslocamento} minutos")
     else:
-        if ((transito == "baixo") or (transito == "medio")) and (tempo < 2*distribuidora[distKey]):
-            if (tempo == "chuva-moderada") or (tempo == "tempestade"):  
-                print("Entrega em tempo")
-            else:
-                print("A entrega ira potencialmente atrasar")
-
-        elif (((dia < DIASMES[mes])) and (feriado == True)) and ((clima == Clima.CHUVA_LEVE) or (clima == Clima.TEMPESTADE)):
-            if (Clima.CHUVA_LEVE or Clima.CHUVA_MODERADA) is clima:
-                print("A entrega ira potencialmente atrasar na(s) regiao X")
-            else: 
-                print("A entrega ira chegar dentro do tempo esperado")
-
-        elif ((dia <= DIASMES[mes]) and (feriado == False)) and ((clima == Clima.ENSOLARADO) and (tempo < 2*distribuidora[distKey])):
-            if clima in [Clima.TEMPESTADE, Clima.CHUVA_MODERADA]:
-                print("A entrega ira potencialmente atrasar na(s) região X")
-            else:
-                print(f"A entrega ira chegar dentro do tempo esperado para {distribuidora[distKey]}")
-    
-        else: print("Erro")
-  
+        print("INPUT DE HORARIO INVALIDO")
