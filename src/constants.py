@@ -1,15 +1,9 @@
 from enum import Enum, auto
 
-class Regioes(Enum):
-    NORTE = auto()
-    NORDESTE = auto()
-    SUL = auto()
-    SUDESTE = auto()
-    CENTRO_OESTE = auto()
-
 class Clima(Enum): 
     CHUVA_LEVE, CHUVA_MODERADA, ENSOLARADO, NUBLADO, TEMPESTADE, NEBLINA = range(6)
 
+# TODO - remover ou adicionar inferencia que faça uso dos meses e das estacoes
 class Estacoes(Enum):
     OUTONO = auto()
     INVERNO = auto()
