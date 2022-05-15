@@ -6,18 +6,15 @@ def main() -> None:
     min = int(input("Diga o minuto em que será realizada a entrega: "))
     
     print("Qual a previsão de clima para o dia/hora")
-    print("\t<1> CHUVA_LEVE\n\
-        <2> CHUVA_MODERADA\n\
-        <3> ENSOLARADO\n\
-        <4> NUBLADO\n\
-        <5> TEMPESTADE\n\
-        <6> NEBLINA")
+    print("\t<1> TEMPO BOM\n\
+        <2> TEMPO MODERADO\n\
+        <3> TEMPO RUIM")
 
     clima = int(input("Diga o estado climatico: "))
-    is_regiao_transito_bloqueado = str(input("O transito está bloqueado (S/n)? "))
+    transito_bloqueado = str(input("O transito está bloqueado na região proxima ao evento (S/n)? "))
     is_evento = str(input("Há evento ocorrendo (S/n)? "))
 
-    regiao_transito_bloqueada = True if is_regiao_transito_bloqueado.upper() == "S" else False 
+    regiao_transito_bloqueada = True if transito_bloqueado.upper() == "S" else False 
     evento = True if is_evento.upper() == "S" else False 
     
     SistemaEspecialista(distancia, 
