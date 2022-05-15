@@ -40,10 +40,11 @@ Com estas informações há como objetivo calcular e identificar o tempo medio p
     - para transito fora de pico o multiplicador é de 1 
     - pra transito moderado próximo a horário de pico (tanto para mais ou para menos do horário) o multiplicador é 1,5
     - para horário de pico o multiplicador é 2
-    - para horario madrugueiro com chuva o multiplicador é 1
-    - para horario fora de pico em dia de chuva multiplicador 1,2
-    - para horario próximo de pico com chuva o multiplicador é 2
-    - para horario de pico com chuva o multiplicador é 3
+    - para horario madrugueiro com tempo ruim o multiplicador é 1
+    - para horario fora de pico em dia de tempo ruim multiplicador 1,2
+    - para horario próximo de pico com tempo ruim o multiplicador é 2
+    - para horario de pico com tempo ruim o multiplicador é 3
+    - para horario fora de pico com tempo pessimo o multiplicador é 2,5
     - Para distancia de até 15 Km(quinze quilometros) o tempo de deslocamento se mantem em 2min(dois minutos) para distancias maiores de 15Km(quinze quilometros) o sofrem um acréscimo de 1 min(um minuto) por quilometro de distancia percorrida.
 
 --- 
