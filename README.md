@@ -1,27 +1,16 @@
-# SistemaEspecialista
+# Sistema Especialista
 
 ### Sistema Especialista em Previsão de Tempo de Entrega
 
-O sistema especialista em questão, irá identificar a possibilidade de atrasos em entregas e o tempo medio para a entrega ocorrer levando em conta fatores como: trânsito, clima, horários, datas e eventos próximos ao local de entrega.
+O sistema especialista em questão, irá identificar o tempo de entrega considerando fatores como: trânsito, clima, horários e eventos próximos ao local de entrega.
 
 Preve tempo de entrgas através de fatores, como:
-    
-- dia
 - clima
 - horario
-- evento 
-- feriado
+- evento
 - distancia
-- Bloqueado (via bloqueada devido a evento)
 
----
-### TODO: CHECAR COMO PODEMOS USAR OU SE SERA EXCLUIDO
-- local ao qual sera enviado? (ainda não usado)
-- epoca do ano (ainda não usado)
-- tempo de entrega (para comparar com o calculado?)
-
----
-Com estas informações há como objetivo identificar o grau de probabilidade de uma entrega ser efetuada em tempo.
+Com estas informações há como objetivo identificar o grau de probabilidade de uma entrega ser efetuada em um determinado tempo.
 
 ---
 
@@ -35,26 +24,13 @@ Com estas informações há como objetivo identificar o grau de probabilidade de
     - Os fatores climáticos podem ou não ter interferência.
         - se chover a entrega terá atrasos devido a possibilidade de aumentar o volume de veículos nas vias.
         - A entrega em um dia ensolarado não terá atrasos devido ao clima.
-- Feriado:
-    - Alto fluxo rodoviario, então tem maior concentração de veiculos, resultando em tempos mais longos de entrega.
 
 ---
 #### Regras:
 
-- 0 <= horario <= 23:59hrs
-- feriado local não conta 
+- 0 <= horario <= 23:59hrs 
 - distancia da distribuidora até o comercio
-- climas permitidos [CHUVA LEVE, CHUVA MODERADA, ENSOLARADO, NUBLADO, TEMPESTADE, NEBLINA]  
-
----
-
-#### AINDA NAO USADO 
-- grupo a ser distribuido (max = 5 prototipo)
-- 0 < dias do mes <= 31, se dias mes > 30 -> será usado 30
-- epoca do ano dentro das estações [OUTONO, INVERNO, PRIMAVERA, VERÃO] 
-- regiões permitidas [NORTE, NORDESTE, SUL, SUDESTE, CENTRO-OESTE) da distribuidora
-
----
+- climas permitidos [TEMPO BOM, TEWMPO RUIM E TEMPO PESSIMO]  
 - Regras de multiplicador
     - para horario madrugueiro o multiplicador é 0,8
     - para transito fora de pico o multiplicador é de 1 
@@ -68,18 +44,18 @@ Com estas informações há como objetivo identificar o grau de probabilidade de
 
 --- 
 
-#### Regras de inferência 
+#### Regras de inferência
 
-- [x] SE distancia <= 15 ENTAO tempo deslocamento = 2 mim por Km
-- [x] SE distancia > 15 ENTAO tempo deslocamEto = 3 mim por Km
-- [x] SE horario madrugueiro E tempo bom ENTAO tempo deslocamento * 0,8
-- [x] SE horario fora de pico E tempo bom ENTAO tempo deslocamento * 1,0
-- [x] SE horario de proximo de pico E tempo bom ENTAO tempo deslocamento * 1,5
-- [x] SE horario de pico E tempo bom ENTAO tempo deslocamento * 2,0
-- [x] SE horario madrugueiro E tempo ruim ENTAO tempo deslocamento * 1,0
-- [x] SE horario fora de pico E tempo ruim ENTAO tempo deslocamento * 1,2
-- [x] SE horario de proximo de pico E tempo ruim ENTAO tempo deslocamento * 2
-- [x] SE horario de pico e tempo ruim ENTAO tempo deslocamento * 3
-- [x] SE tempo pessimo ENTAO não entrega
-- [x] SE evento E não bloqueado ENTAO tempo deslocamEnto * 5,0
-- [x] SE evento e bloqueado ENTAO não entregua
+- [x] SE distancia <= 15 ENTAO =tempo deslocamento 00:02 por Km
+- [x] SE distancia > 15 ENTAO =tempo deslocamento 00:03 por Km
+- [x] SE (horario > 00:00 E horario =< 05:00) E tempo bom ENTAO = tempo deslocamento * 0,8
+- [x] SE ((horario > 09:00 OU horario =< 17:00) OU (horario > 20:00 OU horario =< 00:00)) E tempo bom ENTAO = tempo deslocamento * 1,0
+- [x] SE  (((horario > 05:00 ou horario =< 06:00) OU (horario > 07:00 OU horario =< 08:00)) OU ((horario > 17:00 ou horario =< 18:00) OU (horario > 19:00 ou horario =< 20:00))) E tempo bom ENTAO = tempo deslocamento * 1,5
+- [x] SE ((horario > 06:00 OU horario =< 07:00) OU (horario > 18:00 ou horario =< 19:00)) E tempo bom ENTAO tempo deslocamento * 2,0
+- [x] SE (horario > 00:00 E horario =< 05:00) E = tempo ruim ENTAO tempo deslocamento * 1,0
+- [x] SE ((horario > 09:00 OU horario =< 17:00) OU (horario > 20:00 OU horario =< 00:00)) E tempo ruim ENTAO = tempo deslocamento * 1,2
+- [x] SE (((horario > 05:00 ou horario =< 06:00) OU (horario > 07:00 OU horario =< 08:00)) OU ((horario > 17:00 ou horario =< 18:00) OU (horario > 19:00 ou horario =< 20:00))) E tempo ruim ENTAO = tempo deslocamento * 2
+- [x] SE ((horario > 06:00 OU horario =< 07:00) OU (horario > 18:00 ou horario =< 19:00)) e tempo ruim ENTAO = tempo deslocamento * 3
+- [x] SE tempo pessimo ENTAO = não entrega
+- [x] SE evento E evento pequeno ENTAO = tempo deslocamEnto * 5,0
+- [x] SE evento E evento grande ENTAO = não entrega
