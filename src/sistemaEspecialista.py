@@ -1,6 +1,8 @@
-from dis import dis
-from webbrowser import get
-from constants import *
+from enum import Enum
+
+class Clima(Enum): 
+    CHUVA_LEVE, CHUVA_MODERADA, ENSOLARADO, NUBLADO, TEMPESTADE, NEBLINA = range(6)
+
 
 def tempo_deslocamento(distancia: int) -> int:
     if distancia <= 15:

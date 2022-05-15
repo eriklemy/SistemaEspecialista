@@ -12,7 +12,7 @@ Preve tempo de entrgas através de fatores, como:
 - evento 
 - feriado
 - distancia
-- Região (bloqueada ou nao)
+- Bloqueado (via bloqueada devido a evento)
 
 ---
 ### TODO: CHECAR COMO PODEMOS USAR OU SE SERA EXCLUIDO
