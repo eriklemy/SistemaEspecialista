@@ -29,8 +29,8 @@ Com estas informações há como objetivo identificar o grau de probabilidade de
 #### Regras:
 
 - 0 <= horario <= 23:59hrs 
-- distancia da distribuidora até o comercio
-- climas permitidos [TEMPO BOM, TEWMPO RUIM E TEMPO PESSIMO]  
+- distancia da distribuidora até o comercio (km)
+- climas permitidos [TEMPO BOM, TEMPO RUIM E TEMPO PESSIMO]  
 - Regras de multiplicador
     - para horario madrugueiro o multiplicador é 0,8
     - para transito fora de pico o multiplicador é de 1 
@@ -48,14 +48,15 @@ Com estas informações há como objetivo identificar o grau de probabilidade de
 
 - [x] SE distancia <= 15 ENTAO =tempo deslocamento 00:02 por Km
 - [x] SE distancia > 15 ENTAO =tempo deslocamento 00:03 por Km
-- [x] SE (horario > 00:00 E horario =< 05:00) E tempo bom ENTAO = tempo deslocamento * 0,8
-- [x] SE ((horario > 09:00 OU horario =< 17:00) OU (horario > 20:00 OU horario =< 00:00)) E tempo bom ENTAO = tempo deslocamento * 1,0
-- [x] SE  (((horario > 05:00 ou horario =< 06:00) OU (horario > 07:00 OU horario =< 08:00)) OU ((horario > 17:00 ou horario =< 18:00) OU (horario > 19:00 ou horario =< 20:00))) E tempo bom ENTAO = tempo deslocamento * 1,5
-- [x] SE ((horario > 06:00 OU horario =< 07:00) OU (horario > 18:00 ou horario =< 19:00)) E tempo bom ENTAO tempo deslocamento * 2,0
-- [x] SE (horario > 00:00 E horario =< 05:00) E = tempo ruim ENTAO tempo deslocamento * 1,0
-- [x] SE ((horario > 09:00 OU horario =< 17:00) OU (horario > 20:00 OU horario =< 00:00)) E tempo ruim ENTAO = tempo deslocamento * 1,2
-- [x] SE (((horario > 05:00 ou horario =< 06:00) OU (horario > 07:00 OU horario =< 08:00)) OU ((horario > 17:00 ou horario =< 18:00) OU (horario > 19:00 ou horario =< 20:00))) E tempo ruim ENTAO = tempo deslocamento * 2
-- [x] SE ((horario > 06:00 OU horario =< 07:00) OU (horario > 18:00 ou horario =< 19:00)) e tempo ruim ENTAO = tempo deslocamento * 3
-- [x] SE tempo pessimo ENTAO = não entrega
-- [x] SE evento E evento pequeno ENTAO = tempo deslocamEnto * 5,0
-- [x] SE evento E evento grande ENTAO = não entrega
+- [x] SE (horario >= 00:00 E horario < 05:00) E tempo bom ENTAO tempo deslocamento * 0,8
+- [x] SE ((horario >= 09:00 E horario < 17:00) OU (horario > 20:00 E horario < 00:00)) E tempo bom ENTAO tempo deslocamento * 1,0
+- [x] SE  (((horario >= 07:00 E horario =< 08:00)) OU ((horario >= 19:00 E horario =< 20:00))) E tempo bom ENTAO tempo deslocamento * 1,5
+- [x] SE ((horario >= 05:00 E horario < 07:00) OU (horario >= 17:00 E horario < 19:00)) E tempo bom ENTAO tempo deslocamento * 2,0
+- [x] SE (horario >= 00:00 E horario < 05:00) E tempo ruim ENTAO tempo deslocamento * 1,0
+- [x] SE ((horario >= 09:00 E horario < 17:00) OU (horario > 20:00 E horario < 00:00)) E tempo ruim ENTAO tempo deslocamento * 1,2
+- [x] SE (((horario >= 07:00 E horario =< 08:00)) OU ((horario >= 19:00 E horario =< 20:00))) E tempo ruim ENTAO tempo deslocamento * 2
+- [x] SE ((horario >= 05:00 OU horario < 07:00) OU (horario >= 17:00 E horario < 19:00)) e tempo ruim ENTAO tempo deslocamento * 3
+- [x] SE ((horario >= 09:00 E horario < 17:00) OU (horario > 20:00 E horario < 00:00)) E tempo pessimo ENTAO tempo deslocamento * 2,5
+- [x] SE tempo pessimo ENTAO não entrega
+- [x] SE evento E evento pequeno (não tem bloqueios) ENTAO tempo deslocamEnto * 5,0
+- [x] SE evento E evento (tem bloqueios) ENTAO não entrega
