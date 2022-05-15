@@ -2,9 +2,8 @@ from sistemaEspecialista import *
 
 def main() -> None:
     distancia = int(input("Por obsequio entre com a distancia até o local de entrega (km): "))
-    hora = int(input("Diga o horario em que será realizada a entrega: "))
-    min = int(input("Diga o minuto em que será realizada a entrega: "))
-    
+    horario = str(input("Diga o horario em que será realizada a entrega (HH:mm): "))
+
     print("Qual a previsão de clima para o dia/hora")
     print("\t<1> TEMPO BOM\n\
         <2> TEMPO MODERADO\n\
@@ -18,7 +17,7 @@ def main() -> None:
     evento = True if is_evento.upper() == "S" else False 
     
     SistemaEspecialista(distancia, 
-                        hora, min, clima,
+                        horario, clima,
                         regiao_transito_bloqueada, evento)
     
 if __name__ == "__main__":
