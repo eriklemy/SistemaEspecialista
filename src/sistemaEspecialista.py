@@ -1,5 +1,4 @@
 from enum import Enum, auto
-from glob import escape
 
 # class Clima(Enum): 
 #     CHUVA_LEVE, CHUVA_MODERADA, ENSOLARADO, NUBLADO, TEMPESTADE, NEBLINA = range(6)
@@ -10,7 +9,7 @@ class Clima_Tempo(Enum):
 class EstadoTransito(Enum): 
     PICO = "pico", 
     MADRUGUEIRO = "madrugueiro"
-    PROXIMO_PICO = "proximo pico" 
+    PROXIMO_PICO = "proximo de pico" 
     FORA_PICO = "fora de pico"
     INVALIDO = auto()
 
@@ -71,10 +70,11 @@ def SistemaEspecialista(distancia: int, horario: str, tempo: int, regiao_transit
 
         if evento and not regiao_transito_bloqueada:
             t_deslocamento *= 5.0
+            print("A entrega irá demora mais devido ao evento, portanto ")
 
         if (get_clima(tempo) == Clima_Tempo.TEMPO_RUIM) and (evento and regiao_transito_bloqueada):
-            print("A entrega não sera realizada")
+            print("A ENTREGA NÃO SERÁ REALIZADA!!")
         else:
             print(f"O tempo medio de entrega é de {t_deslocamento} minutos")
     else:
-        print("INPUT DE HORARIO INVALIDO")
+        print("INPUT DE HORARIO INVALIDO!!")
