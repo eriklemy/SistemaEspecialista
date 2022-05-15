@@ -1,16 +1,20 @@
 # Sistema Especialista
 
+#### Integrantes:
+- Erick Lemmy dos Santos Oliveira
+- Guilherme Janke
+
 ### Sistema Especialista em Previsão de Tempo de Entrega
 
 O sistema especialista em questão, irá identificar o tempo de entrega considerando fatores como: trânsito, clima, horários e eventos próximos ao local de entrega.
 
-Preve tempo de entrgas através de fatores, como:
+Preve tempo de entrega através de fatores, como:
 - clima
 - horario
 - evento
 - distancia
 
-Com estas informações há como objetivo identificar o grau de probabilidade de uma entrega ser efetuada em um determinado tempo.
+Com estas informações há como objetivo calcular e identificar o tempo medio para a realização da entregas por meio dos dados de entrada e dos multiplicadores com auxilio das inferências.
 
 ---
 
