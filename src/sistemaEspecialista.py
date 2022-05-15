@@ -14,12 +14,12 @@ class EstadoTransito(Enum):
     FORA_PICO = "fora de pico"
     INVALIDO = auto()
 
-def tempo_deslocamento(distancia: int) -> int:
+def tempo_deslocamento(distancia: int) -> float:
     if distancia <= 15:
         return 2 * distancia
     else: return 3 * distancia 
 
-def fluxo_horario(hora: int, min: int) -> str:
+def fluxo_horario(hora: int, min: int) -> EstadoTransito:
     if (0 <= hora < 24) and (0 <= min <= 59):
         if hora in [6, 7, 8, 17, 18, 19]:
             return EstadoTransito.PICO
@@ -32,7 +32,7 @@ def fluxo_horario(hora: int, min: int) -> str:
     else: 
         return EstadoTransito.INVALIDO
 
-def get_clima(tempo: int):
+def get_clima(tempo: int) -> Clima_Tempo:
     return Clima_Tempo(tempo - 1)
 
 def SistemaEspecialista(distancia: int, hora: int , min: int, tempo: int, regiao_transito_bloqueada: bool, evento: bool) -> None:	
