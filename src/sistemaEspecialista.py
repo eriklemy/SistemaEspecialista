@@ -17,13 +17,14 @@ def tempo_deslocamento(distancia: int) -> float:
 
 def fluxo_horario(horario: str) -> EstadoTransito:
     hora, min = horario.split(":")
+    print(int(hora), min)
 
     if (0 <= int(hora) < 24) and (0 <= int(min) <= 59):
-        if hora in [7, 8, 19, 20]:
+        if int(hora) in [7, 8, 19, 20]:
             return EstadoTransito.PICO
-        elif hora in [0, 1, 2, 3, 4]:
+        elif int(hora) in [23, 0, 1, 2, 3, 4]:
             return EstadoTransito.MADRUGUEIRO
-        elif hora in [5, 6, 17, 18]:
+        elif int(hora) in [5, 6, 17, 18]:
             return EstadoTransito.PROXIMO_PICO
         else:
             return EstadoTransito.FORA_PICO
@@ -34,6 +35,8 @@ def get_clima(tempo: int) -> Clima_Tempo:
 
 def SistemaEspecialista(distancia: int, horario: str, tempo: int, evento: bool, regiao_transito_bloqueada: bool = False) -> None:	
     t_deslocamento = tempo_deslocamento(distancia)
+    print(get_clima(tempo))
+    print(fluxo_horario(horario))
 
     if fluxo_horario(horario) != EstadoTransito.INVALIDO:
 

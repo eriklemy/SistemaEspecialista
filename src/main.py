@@ -4,13 +4,21 @@
         Guilherme Janke
 """
 from sistemaEspecialista import *
-
-def main() -> None:
+def menu() -> None:
     print("SISTEMA ESPECIALISTA EM PREVISÃO DE TEMPO DE ENTREGA")
+    print("="*75)
     print("REGRAS: ")
     print("\t0 <= horario <= 23:59hrs")
     print("\tdistancia da distribuidora até o comercio (km)")
-    
+    print("\tHorarios: ")
+    print("\t\tMadrugueiro (00:00 até 04:59)")
+    print("\t\tFora de Pico (09:00 até 16:59 E 20:01 até 23:59)")
+    print("\t\tProximo de Pico (05:00 até 06:59 E 17:00 até 18:59)")
+    print("\t\tPico (07:00 até 08:59 E 19:00 até 20:59)")
+    print("="*75)
+def main() -> None:
+    menu()
+
     distancia = float(input("INFORME A DISTANCIA ATÉ O LOCAL DE ENTREGA (Km): "))
     horario = str(input("INFORME O HORARIO EM QUE SERÁ REALIZADA A ENTREGA (HH:mm): "))
 
