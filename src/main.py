@@ -1,20 +1,28 @@
+""" 
+    RPLM - SISTEMA ESPECIALISTA
+        Erick Lemmy dos Santos Oliveira 
+        Guilherme Janke
+"""
 from sistemaEspecialista import *
 
 def main() -> None:
-    distancia = int(input("Por obsequio entre com a distancia até o local de entrega (km): "))
-    horario = str(input("Diga o horario em que será realizada a entrega (HH:mm): "))
+    print("SISTEMA ESPECIALISTA EM PREVISÃO DE TEMPO DE ENTREGA")
+    print("REGRAS: ")
+    print("\t0 <= horario <= 23:59hrs")
+    print("\tdistancia da distribuidora até o comercio (km)")
+    
+    distancia = float(input("INFORME A DISTANCIA ATÉ O LOCAL DE ENTREGA (Km): "))
+    horario = str(input("INFORME O HORARIO EM QUE SERÁ REALIZADA A ENTREGA (HH:mm): "))
 
-    print("Qual a previsão de clima para o dia/hora")
-    print("\t<1> TEMPO BOM\n\
-        <2> TEMPO RUIM\n\
-        <3> TEMPO PESSIMO")
+    print("INFORME A PREVISÃO DO CLIMA PARA DIA/HORA DA ENTREGA: ")
+    print("<1> TEMPO BOM\n<2> TEMPO RUIM\n<3> TEMPO PESSIMO")
 
-    clima = int(input("Diga o estado climatico: "))
-    is_evento = str(input("Há evento ocorrendo (S/n)? "))
+    clima = int(input("ENTRE COM O ESTADO CLIMATICO: "))
+    is_evento = str(input("INFORME SE HÁ OCORRENCIA DE EVENTOS NA REGIÃO (S/n)? "))
     evento = True if is_evento.upper() == "S" else False 
    
     if (evento):
-        transito_bloqueado = str(input("O transito está bloqueado na região proxima ao evento (S/n)? "))
+        transito_bloqueado = str(input("O TRANSITO ESTÁ BLOQUEADO NA REGIÃO PROXIMA AO EVENTO (S/n)? "))
         regiao_transito_bloqueada = True if transito_bloqueado.upper() == "S" else False 
         SistemaEspecialista(distancia, horario, clima, evento, regiao_transito_bloqueada)
     else:

@@ -64,13 +64,14 @@ def SistemaEspecialista(distancia: int, horario: str, tempo: int, evento: bool, 
         if (fluxo_horario(horario) == EstadoTransito.FORA_PICO) and get_clima(tempo) == (Clima_Tempo.TEMPO_PESSIMO):
             t_deslocamento *= 2.5
 
+        print("="*90)
         if evento and not regiao_transito_bloqueada:
             t_deslocamento *= 5.0
-            print("A entrega irá demora mais devido ao evento, portanto ")
+            print("A ENTREGA IRÁ DEMORAR MAIS DEVIDO HÁ OCORRENCIA DE EVENTO, PORTANTO ")
 
         if (get_clima(tempo) == Clima_Tempo.TEMPO_PESSIMO) and (evento and regiao_transito_bloqueada):
-            print("A ENTREGA NÃO SERÁ REALIZADA!!")
+            print("A ENTREGA NÃO SERÁ REALIZADA POIS HÁ OCORRENCIA DE EVENTO E AS RUAS ESTÃO BLOQUEADAS!!")
         else:
-            print(f"O tempo medio de entrega é de {t_deslocamento} minutos")
+            print(f"O TEMPO MEDIO DE ENTREGA É DE {t_deslocamento} MINUTOS!!")
     else:
         print("INPUT DE HORARIO INVALIDO!!")
