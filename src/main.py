@@ -9,7 +9,7 @@ def menu() -> None:
     print("="*75)
     print("REGRAS: ")
     print("\t0 <= horario <= 23:59hrs")
-    print("\tdistancia da distribuidora até o comercio (km)")
+    print("\tdistancia (Km)")
     print("\tHorarios: ")
     print("\t\tMadrugueiro (00:00 até 04:59)")
     print("\t\tFora de Pico (09:00 até 16:59 E 20:01 até 23:59)")
