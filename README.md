@@ -60,7 +60,7 @@ Com estas informações há como objetivo calcular e identificar o tempo medio p
 - SE (horario >= 00:00 E horario < 05:00) E tempo ruim ENTAO tempo deslocamento * 1,0
 - SE ((horario >= 09:00 E horario < 17:00) OU (horario > 20:00 E horario < 00:00)) E tempo ruim ENTAO tempo deslocamento * 1,2
 - SE (((horario >= 07:00 E horario =< 08:00)) OU ((horario >= 19:00 E horario =< 20:00))) E tempo ruim ENTAO tempo deslocamento * 2
-- SE ((horario >= 05:00 OU horario < 07:00) OU (horario >= 17:00 E horario < 19:00)) e tempo ruim ENTAO tempo deslocamento * 3
+- SE ((horario >= 05:00 E horario < 07:00) OU (horario >= 17:00 E horario < 19:00)) e tempo ruim ENTAO tempo deslocamento * 3
 - SE ((horario >= 09:00 E horario < 17:00) OU (horario > 20:00 E horario < 00:00)) E tempo pessimo ENTAO tempo deslocamento * 2,5
 - SE tempo pessimo ENTAO não entrega
 - SE evento E evento pequeno (não tem bloqueios) ENTAO tempo deslocamEnto * 5,0
